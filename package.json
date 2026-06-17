@@ -15,7 +15,6 @@
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.0",
     "@electron-toolkit/utils": "^3.0.0",
-    "electron-updater": "^6.1.7",
     "lucide-react": "^0.542.0",
     "radix-ui": "^1.4.3",
     "react": "^19.1.1",

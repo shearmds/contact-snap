@@ -10,18 +10,6 @@ export interface ContactInfo {
   note: string;
 }
 
-export const EMPTY_CONTACT: ContactInfo = {
-  firstName: "",
-  lastName: "",
-  company: "",
-  jobTitle: "",
-  email: "",
-  phone: "",
-  address: "",
-  website: "",
-  note: "",
-};
-
 export const REGION_TO_CALLING_CODE: Record<string, string> = {
   US: "+1",  CA: "+1",  GB: "+44", UK: "+44", AU: "+61", NZ: "+64",
   DE: "+49", FR: "+33", IT: "+39", ES: "+34", PT: "+351",

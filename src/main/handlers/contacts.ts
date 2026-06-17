@@ -1,18 +1,7 @@
 import { ipcMain } from "electron";
 import { geminiService } from "../services/gemini";
 import { contactsService } from "../services/contacts";
-
-interface ContactInfo {
-  firstName: string;
-  lastName: string;
-  company: string;
-  jobTitle: string;
-  email: string;
-  phone: string;
-  address: string;
-  website: string;
-  note: string;
-}
+import type { ContactInfo } from "../services/contact-utils";
 
 export function registerContactsHandlers(): void {
   ipcMain.handle(
