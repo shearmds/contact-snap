@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+/* ── Radix color scale (light mode) ─────────────────────────────────────── */
+:root {
+  --gray-1:  hsl(0, 0%, 99%);
+  --gray-2:  hsl(0, 0%, 97.3%);
+  --gray-3:  hsl(0, 0%, 95.1%);
+  --gray-4:  hsl(0, 0%, 93%);
+  --gray-5:  hsl(0, 0%, 90.9%);
+  --gray-6:  hsl(0, 0%, 88.7%);
+  --gray-7:  hsl(0, 0%, 85.8%);
+  --gray-8:  hsl(0, 0%, 78%);
+  --gray-9:  hsl(0, 0%, 56.1%);
+  --gray-10: hsl(0, 0%, 52.3%);
+  --gray-11: hsl(0, 0%, 43.5%);
+  --gray-12: hsl(0, 0%, 9%);
+
+  --gray-a1:  hsla(0, 0%, 0%, 0.012);
+  --gray-a2:  hsla(0, 0%, 0%, 0.027);
+  --gray-a3:  hsla(0, 0%, 0%, 0.047);
+  --gray-a4:  hsla(0, 0%, 0%, 0.071);
+  --gray-a5:  hsla(0, 0%, 0%, 0.090);
+  --gray-a6:  hsla(0, 0%, 0%, 0.114);
+  --gray-a7:  hsla(0, 0%, 0%, 0.141);
+  --gray-a8:  hsla(0, 0%, 0%, 0.220);
+  --gray-a9:  hsla(0, 0%, 0%, 0.439);
+  --gray-a10: hsla(0, 0%, 0%, 0.478);
+  --gray-a11: hsla(0, 0%, 0%, 0.565);
+  --gray-a12: hsla(0, 0%, 0%, 0.910);
+
+  --blue-1:  hsl(206, 100%, 99.2%);
+  --blue-2:  hsl(210, 100%, 98%);
+  --blue-3:  hsl(209, 100%, 96.5%);
+  --blue-4:  hsl(210, 98.8%, 94%);
+  --blue-5:  hsl(209, 95%, 90.1%);
+  --blue-6:  hsl(209, 81.2%, 84.5%);
+  --blue-7:  hsl(208, 77.5%, 76.9%);
+  --blue-8:  hsl(206, 81.9%, 65.3%);
+  --blue-9:  hsl(206, 100%, 50%);
+  --blue-10: hsl(208, 100%, 47.3%);
+  --blue-11: hsl(211, 100%, 43.2%);
+  --blue-12: hsl(211, 70%, 20.2%);
+
+  --blue-a2: hsla(210, 100%, 50%, 0.06);
+  --blue-a3: hsla(210, 100%, 50%, 0.13);
+  --blue-a9: hsla(206, 100%, 50%, 0.992);
+
+  --red-9:  hsl(358, 75%, 59%);
+  --red-10: hsl(358, 65%, 48.7%);
+  --red-11: hsl(358, 60%, 44%);
+
+  /* Semantic tokens */
+  --background: var(--gray-1);
+  --foreground:  var(--gray-12);
+  --border:      var(--gray-a6);
+  --ring:        var(--blue-9);
+}
+
+/* ── Dark mode ───────────────────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --gray-1:  hsl(0, 0%, 8.5%);
+    --gray-2:  hsl(0, 0%, 11%);
+    --gray-3:  hsl(0, 0%, 13.6%);
+    --gray-4:  hsl(0, 0%, 15.8%);
+    --gray-5:  hsl(0, 0%, 17.9%);
+    --gray-6:  hsl(0, 0%, 20.5%);
+    --gray-7:  hsl(0, 0%, 24.3%);
+    --gray-8:  hsl(0, 0%, 31.2%);
+    --gray-9:  hsl(0, 0%, 43.9%);
+    --gray-10: hsl(0, 0%, 49.4%);
+    --gray-11: hsl(0, 0%, 62.8%);
+    --gray-12: hsl(0, 0%, 93%);
+
+    --gray-a1:  hsla(0, 0%, 100%, 0.005);
+    --gray-a2:  hsla(0, 0%, 100%, 0.026);
+    --gray-a3:  hsla(0, 0%, 100%, 0.056);
+    --gray-a4:  hsla(0, 0%, 100%, 0.077);
+    --gray-a5:  hsla(0, 0%, 100%, 0.097);
+    --gray-a6:  hsla(0, 0%, 100%, 0.125);
+    --gray-a7:  hsla(0, 0%, 100%, 0.156);
+    --gray-a8:  hsla(0, 0%, 100%, 0.231);
+    --gray-a9:  hsla(0, 0%, 100%, 0.430);
+    --gray-a10: hsla(0, 0%, 100%, 0.493);
+    --gray-a11: hsla(0, 0%, 100%, 0.624);
+    --gray-a12: hsla(0, 0%, 100%, 0.923);
+
+    --blue-9:  hsl(206, 100%, 50%);
+    --blue-10: hsl(210, 100%, 56%);
+    --blue-11: hsl(210, 100%, 72.7%);
+
+    --blue-a2: hsla(214, 100%, 59%, 0.059);
+    --blue-a3: hsla(210, 100%, 58%, 0.118);
+
+    --red-10: hsl(358, 70%, 58%);
+    --red-11: hsl(358, 100%, 69%);
+  }
+}
+
+/* ── Map CSS vars to Tailwind v4 theme ───────────────────────────────────── */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground:  var(--foreground);
+
+  --color-gray-1:   var(--gray-1);
+  --color-gray-2:   var(--gray-2);
+  --color-gray-3:   var(--gray-3);
+  --color-gray-4:   var(--gray-4);
+  --color-gray-5:   var(--gray-5);
+  --color-gray-6:   var(--gray-6);
+  --color-gray-7:   var(--gray-7);
+  --color-gray-8:   var(--gray-8);
+  --color-gray-9:   var(--gray-9);
+  --color-gray-10:  var(--gray-10);
+  --color-gray-11:  var(--gray-11);
+  --color-gray-12:  var(--gray-12);
+
+  --color-gray-a1:  var(--gray-a1);
+  --color-gray-a2:  var(--gray-a2);
+  --color-gray-a3:  var(--gray-a3);
+  --color-gray-a4:  var(--gray-a4);
+  --color-gray-a5:  var(--gray-a5);
+  --color-gray-a6:  var(--gray-a6);
+  --color-gray-a7:  var(--gray-a7);
+  --color-gray-a8:  var(--gray-a8);
+  --color-gray-a9:  var(--gray-a9);
+  --color-gray-a10: var(--gray-a10);
+  --color-gray-a11: var(--gray-a11);
+  --color-gray-a12: var(--gray-a12);
+
+  --color-blue-1:   var(--blue-1);
+  --color-blue-9:   var(--blue-9);
+  --color-blue-10:  var(--blue-10);
+  --color-blue-11:  var(--blue-11);
+  --color-blue-a2:  var(--blue-a2);
+  --color-blue-a3:  var(--blue-a3);
+
+  --color-red-9:    var(--red-9);
+  --color-red-10:   var(--red-10);
+  --color-red-11:   var(--red-11);
+
+  /* Apple typography scale */
+  --font-size-body:          0.8125rem; /* 13px */
+  --font-size-bodyEmphasized: 0.8125rem;
+  --font-size-footnote:      0.6875rem; /* 11px */
+  --font-size-caption1:      0.625rem;  /* 10px */
+  --font-size-caption2:      0.5625rem; /* 9px */
+}
+
+/* ── Typography utilities ────────────────────────────────────────────────── */
+.text-body           { font-size: 0.8125rem; font-weight: 400; }
+.text-bodyEmphasized { font-size: 0.8125rem; font-weight: 600; }
+.text-footnote       { font-size: 0.6875rem; font-weight: 400; }
+.text-caption1       { font-size: 0.625rem;  font-weight: 400; }
+.text-caption2       { font-size: 0.5625rem; font-weight: 400; }
+
+/* ── Base styles ─────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 13px;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Electron draggable title bar region */
+.drag-region {
+  -webkit-app-region: drag;
+}
+.drag-region * {
+  -webkit-app-region: no-drag;
+}

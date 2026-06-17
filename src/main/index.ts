@@ -1,0 +1,133 @@
+import { app, BrowserWindow, Menu, Tray, nativeImage, shell } from "electron";
+import { join } from "path";
+import { is } from "@electron-toolkit/utils";
+import { registerHandlers } from "./handlers/index";
+import { initGlobalHotkey, teardownGlobalHotkey } from "./handlers/settings";
+
+registerHandlers();
+
+let mainWindow: BrowserWindow | null = null;
+let tray: Tray | null = null;
+let creating: Promise<void> | null = null;
+
+async function showMainWindow(): Promise<void> {
+  if (mainWindow && !mainWindow.isDestroyed()) {
+    mainWindow.show();
+    mainWindow.focus();
+    return;
+  }
+  if (creating) {
+    await creating;
+    mainWindow?.show();
+    return;
+  }
+  creating = createMainWindow().finally(() => {
+    creating = null;
+  });
+  await creating;
+}
+
+async function createMainWindow(): Promise<void> {
+  if (mainWindow && !mainWindow.isDestroyed()) return;
+
+  mainWindow = new BrowserWindow({
+    width: 520,
+    height: 480,
+    minWidth: 500,
+    minHeight: 456,
+    title: "Contact Snap",
+    show: false,
+    titleBarStyle: "hiddenInset",
+    trafficLightPosition: { x: 12, y: 12 },
+    webPreferences: {
+      preload: join(__dirname, "../preload/index.js"),
+      sandbox: false,
+    },
+  });
+
+  mainWindow.once("ready-to-show", () => {
+    mainWindow?.show();
+  });
+
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    shell.openExternal(url);
+    return { action: "deny" };
+  });
+
+  if (is.dev && process.env["ELECTRON_RENDERER_URL"]) {
+    mainWindow.loadURL(process.env["ELECTRON_RENDERER_URL"]);
+  } else {
+    mainWindow.loadFile(join(__dirname, "../renderer/index.html"));
+  }
+}
+
+function setupApplicationMenu(): void {
+  const menu = Menu.buildFromTemplate([
+    {
+      label: "Contact Snap",
+      submenu: [
+        { role: "about" },
+        { type: "separator" },
+        {
+          label: "Settings…",
+          accelerator: "Command+,",
+          click: () => {
+            mainWindow?.webContents.send("open-settings");
+          },
+        },
+        { type: "separator" },
+        { role: "services" },
+        { type: "separator" },
+        { role: "hide" },
+        { role: "hideOthers" },
+        { role: "unhide" },
+        { type: "separator" },
+        { role: "quit" },
+      ],
+    },
+    { role: "fileMenu" },
+    { role: "editMenu" },
+    { role: "viewMenu" },
+    { role: "windowMenu" },
+  ]);
+  Menu.setApplicationMenu(menu);
+}
+
+function setupTray(): void {
+  // Electron auto-picks tray-icon@2x.png on retina when tray-icon.png is given
+  const iconPath = join(__dirname, "../../resources/tray-icon.png");
+  const icon = nativeImage.createFromPath(iconPath);
+  icon.setTemplateImage(true);
+
+  tray = new Tray(icon);
+  tray.setToolTip("Contact Snap");
+  tray.setContextMenu(
+    Menu.buildFromTemplate([
+      { label: "Quit Contact Snap", click: () => app.quit() },
+    ]),
+  );
+  tray.on("click", () => showMainWindow());
+}
+
+app.on("window-all-closed", () => {
+  // Keep alive in menu bar
+});
+
+app.on("activate", async () => {
+  await app.dock.hide();
+  if (!mainWindow || mainWindow.isDestroyed()) {
+    await showMainWindow();
+  }
+});
+
+app.on("before-quit", async () => {
+  await teardownGlobalHotkey();
+  tray?.destroy();
+});
+
+app.whenReady().then(async () => {
+  await app.dock.hide();
+  setupApplicationMenu();
+  setupTray();
+  initGlobalHotkey(() => showMainWindow());
+});

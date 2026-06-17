@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Build output
+out/
+dist/
+
+# Electron builder artifacts
+build/
+*.dmg
+*.pkg
+*.zip
+*.blockmap
+release/
+
+# macOS
+.DS_Store
+*.pem
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Editor
+.vscode/
+.idea/
+*.swp
