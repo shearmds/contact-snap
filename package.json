@@ -4,6 +4,7 @@
   "productName": "Contact Snap",
   "description": "Snap photos, save contacts instantly",
   "main": "out/main/index.js",
+  "author": "Mike Shear",
   "private": true,
   "scripts": {
     "dev": "electron-vite dev",
@@ -38,6 +39,7 @@
     "typescript": "^5.5.3"
   },
   "build": {
+    "afterPack": "./scripts/after-pack.js",
     "appId": "com.mikeshear.contact-snap",
     "productName": "Contact Snap",
     "mac": {
@@ -46,14 +48,21 @@
       "entitlements": "resources/entitlements.mac.plist",
       "entitlementsInherit": "resources/entitlements.mac.plist",
       "hardenedRuntime": true,
-      "gatekeeperAssess": false
+      "gatekeeperAssess": false,
+      "notarize": {
+        "teamId": "95E9CZ9HW6"
+      }
     },
     "files": [
       "out/**/*"
     ],
+    "extraResources": [
+      { "from": "resources/tray-icon.png", "to": "tray-icon.png" },
+      { "from": "resources/tray-icon@2x.png", "to": "tray-icon@2x.png" }
+    ],
     "directories": {
       "buildResources": "resources",
-      "output": "dist"
+      "output": "/tmp/contact-snap-dist"
     }
   }
 }

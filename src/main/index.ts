@@ -94,8 +94,9 @@ function setupApplicationMenu(): void {
 }
 
 function setupTray(): void {
-  // Electron auto-picks tray-icon@2x.png on retina when tray-icon.png is given
-  const iconPath = join(__dirname, "../../resources/tray-icon.png");
+  const iconPath = is.dev
+    ? join(__dirname, "../../resources/tray-icon.png")
+    : join(process.resourcesPath, "tray-icon.png");
   const icon = nativeImage.createFromPath(iconPath);
   icon.setTemplateImage(true);
 
