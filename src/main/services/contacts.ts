@@ -62,7 +62,7 @@ class ContactsService {
       if (message.includes("not allowed") || message.includes("permission")) {
         return {
           success: false,
-          error: "Contact Snap does not have permission to access Contacts. Please grant access in System Settings > Privacy & Security > Contacts.",
+          error: "Snap2Contact does not have permission to access Contacts. Please grant access in System Settings > Privacy & Security > Contacts.",
         };
       }
       return { success: false, error: `Failed to save contact: ${message}` };

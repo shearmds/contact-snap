@@ -261,7 +261,7 @@ function SettingsDialog({
               <p className="text-caption1 text-red-10 mt-1.5">{hotkeyError}</p>
             )}
             <p className="text-caption2 text-gray-9 mt-1.5">
-              Opens Contact Snap from anywhere on your Mac.
+              Opens Snap2Contact from anywhere on your Mac.
             </p>
           </div>
         </DialogBody>
@@ -697,7 +697,7 @@ export function HomeView() {
               <ContactIcon className="w-5 h-5 text-gray-1" />
             </div>
             <div>
-              <h1 className="text-[15px] font-semibold text-gray-12">Contact Snap</h1>
+              <h1 className="text-[15px] font-semibold text-gray-12">Snap2Contact</h1>
               <p className="text-[12px] text-gray-9">
                 {appState === "capture" && "Capture contact info from an image or text"}
                 {appState === "processing" && "Analyzing image..."}

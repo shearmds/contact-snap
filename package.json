@@ -1,7 +1,7 @@
 {
   "name": "contact-snap",
   "version": "1.0.0",
-  "productName": "Contact Snap",
+  "productName": "Snap2Contact",
   "description": "Snap photos, save contacts instantly",
   "main": "out/main/index.js",
   "author": "Mike Shear",
@@ -41,7 +41,7 @@
   "build": {
     "afterPack": "./scripts/after-pack.js",
     "appId": "com.mikeshear.contact-snap",
-    "productName": "Contact Snap",
+    "productName": "Snap2Contact",
     "mac": {
       "category": "public.app-category.productivity",
       "icon": "resources/icon.icns",

@@ -35,7 +35,7 @@ async function createMainWindow(): Promise<void> {
     height: 480,
     minWidth: 500,
     minHeight: 456,
-    title: "Contact Snap",
+    title: "Snap2Contact",
     show: false,
     titleBarStyle: "hiddenInset",
     trafficLightPosition: { x: 12, y: 12 },
@@ -64,7 +64,7 @@ async function createMainWindow(): Promise<void> {
 function setupApplicationMenu(): void {
   const menu = Menu.buildFromTemplate([
     {
-      label: "Contact Snap",
+      label: "Snap2Contact",
       submenu: [
         { role: "about" },
         { type: "separator" },
@@ -101,10 +101,10 @@ function setupTray(): void {
   icon.setTemplateImage(true);
 
   tray = new Tray(icon);
-  tray.setToolTip("Contact Snap");
+  tray.setToolTip("Snap2Contact");
   tray.setContextMenu(
     Menu.buildFromTemplate([
-      { label: "Quit Contact Snap", click: () => app.quit() },
+      { label: "Quit Snap2Contact", click: () => app.quit() },
     ]),
   );
   tray.on("click", () => showMainWindow());
