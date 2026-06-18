@@ -1,4 +1,4 @@
-import { ipcMain, globalShortcut } from "electron";
+import { ipcMain, globalShortcut, app } from "electron";
 import { settingsService } from "../services/settings";
 
 const DEFAULT_HOTKEY = "Shift+Alt+N";
@@ -37,6 +37,18 @@ export async function teardownGlobalHotkey(): Promise<void> {
 }
 
 export function registerSettingsHandlers(): void {
+  ipcMain.handle("settings:get-launch-at-login", (): { openAtLogin: boolean } => {
+    return { openAtLogin: app.getLoginItemSettings().openAtLogin };
+  });
+
+  ipcMain.handle(
+    "settings:set-launch-at-login",
+    (_event, params: { openAtLogin: boolean }): { success: boolean } => {
+      app.setLoginItemSettings({ openAtLogin: params.openAtLogin });
+      return { success: true };
+    },
+  );
+
   ipcMain.handle("settings:get-hotkey", (): { hotkey: string } => {
     const hotkey = settingsService.get<string>(HOTKEY_SETTINGS_KEY, DEFAULT_HOTKEY);
     return { hotkey: hotkey ?? DEFAULT_HOTKEY };

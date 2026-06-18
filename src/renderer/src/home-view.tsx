@@ -145,6 +145,7 @@ function SettingsDialog({
   const [hotkey, setHotkey] = useState("");
   const [recording, setRecording] = useState(false);
   const [hotkeyError, setHotkeyError] = useState("");
+  const [launchAtLogin, setLaunchAtLogin] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -154,8 +155,12 @@ function SettingsDialog({
 
     (async () => {
       try {
-        const hotkeyResult = await window.glazeAPI.glaze.ipc.invoke<{ hotkey: string }>("settings:get-hotkey");
+        const [hotkeyResult, loginResult] = await Promise.all([
+          window.glazeAPI.glaze.ipc.invoke<{ hotkey: string }>("settings:get-hotkey"),
+          window.glazeAPI.glaze.ipc.invoke<{ openAtLogin: boolean }>("settings:get-launch-at-login"),
+        ]);
         setHotkey(hotkeyResult.hotkey);
+        setLaunchAtLogin(loginResult.openAtLogin);
       } catch (err) {
         console.error("[Settings:load] Failed to load settings", err);
       }
@@ -195,6 +200,7 @@ function SettingsDialog({
         }
       }
 
+      await window.glazeAPI.glaze.ipc.invoke("settings:set-launch-at-login", { openAtLogin: launchAtLogin });
       toast.success("Settings saved");
       onOpenChange(false);
     } catch (err) {
@@ -203,7 +209,7 @@ function SettingsDialog({
     } finally {
       setLoading(false);
     }
-  }, [hotkey, onOpenChange]);
+  }, [hotkey, launchAtLogin, onOpenChange]);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -263,6 +269,30 @@ function SettingsDialog({
             <p className="text-caption2 text-gray-9 mt-1.5">
               Opens Snap2Contact from anywhere on your Mac.
             </p>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-bodyEmphasized text-gray-12">Launch at Login</p>
+              <p className="text-caption2 text-gray-9 mt-0.5">Open Contact Snap automatically when you log in.</p>
+            </div>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={launchAtLogin}
+              onClick={() => setLaunchAtLogin((v) => !v)}
+              className={cn(
+                "relative inline-flex h-5 w-9 shrink-0 rounded-full transition-colors duration-150 focus:outline-none",
+                launchAtLogin ? "bg-blue-9" : "bg-gray-a6",
+              )}
+            >
+              <span
+                className={cn(
+                  "pointer-events-none inline-block h-4 w-4 rounded-full bg-white shadow mt-0.5 transform transition-transform duration-150",
+                  launchAtLogin ? "translate-x-4.5" : "translate-x-0.5",
+                )}
+              />
+            </button>
           </div>
         </DialogBody>
         <DialogFooter>

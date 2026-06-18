@@ -237,6 +237,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 95E9CZ9HW6;
 				INFOPLIST_FILE = ContactSnap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -313,6 +314,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 95E9CZ9HW6;
 				INFOPLIST_FILE = ContactSnap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
