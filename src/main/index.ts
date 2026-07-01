@@ -100,14 +100,14 @@ function setupTray(): void {
   const icon = nativeImage.createFromPath(iconPath);
   icon.setTemplateImage(true);
 
+  const contextMenu = Menu.buildFromTemplate([
+    { label: "Quit Snap2Contact", click: () => app.quit() },
+  ]);
+
   tray = new Tray(icon);
   tray.setToolTip("Snap2Contact");
-  tray.setContextMenu(
-    Menu.buildFromTemplate([
-      { label: "Quit Snap2Contact", click: () => app.quit() },
-    ]),
-  );
   tray.on("click", () => showMainWindow());
+  tray.on("right-click", () => tray?.popUpContextMenu(contextMenu));
 }
 
 app.on("window-all-closed", () => {
